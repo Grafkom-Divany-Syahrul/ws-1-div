@@ -1,0 +1,59 @@
+<html>
+<head>
+    <link rel="stylesheet" href="cad1.css">
+</head>
+
+<!-- <h1>Draw your shape!</h1> -->
+
+<div class="canvas-container">
+<canvas id="gl-canvas" width="512" height="512"></canvas>
+</div>
+
+<div class="menu"> 
+    <button  class="button selected" value = "0">Black</button>
+    <button  class="button" value = "1">Red</button>
+    <button  class="button" value = "2">Yellow</button>
+    <button  class="button" value = "3">Green</button>
+    <button  class="button" value = "4">Blue</button> 
+    <button  class="button" value = "5">Magenta</button> 
+    <button  class="button" value = "6">Cyan</button> 
+</div>
+
+<script id="vertex-shader" type="x-shader/x-vertex">
+#version 300 es
+
+in vec4 aPosition;
+in vec4 aColor;
+
+out vec4 vColor;
+
+void main()
+{
+    gl_Position = aPosition;
+    vColor = aColor;
+}
+</script>
+
+<script id="fragment-shader" type="x-shader/x-fragment">
+#version 300 es
+
+precision mediump float;
+
+in vec4 vColor;
+out vec4 fColor;
+
+void main()
+{
+    fColor = vColor;
+}
+</script>
+
+
+
+
+
+<script src="../Common/initShaders.js"></script>
+<script src="../Common/MVnew.js"></script>
+<script src="cad1.js"></script>
+
+</html>
