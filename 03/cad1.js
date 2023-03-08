@@ -50,7 +50,7 @@ function init() {
     if (!gl) alert("WebGL 2.0 isn't available");
 
     gl.viewport(0,0, canvas.width, canvas.height);
-    gl.clearColor(0.8, 0.8, 0.8, 1.0);
+    gl.clearColor(0.99, 0.96, 0.93, 1.0);
     gl.clear(gl.COLOR_BUFFER_BIT);
 
 
@@ -89,14 +89,14 @@ function init() {
         if(first) {
           first = false;
           gl.bindBuffer( gl.ARRAY_BUFFER, vBuffer)
-          t[0] = vec2(2*event.clientX/canvas.width-1,
-            2*(canvas.height-event.clientY)/canvas.height-1);
+          t[0] = vec2(2*(event.clientX - canvas.offsetLeft)/canvas.width-1, //adjust mengikuti posisi canvas karena canvas digeser ke tengah
+            2*(canvas.height - event.clientY + canvas.offsetTop)/canvas.height-1);
         }
 
         else {
           first = true;
-          t[2] = vec2(2*event.clientX/canvas.width-1,
-            2*(canvas.height-event.clientY)/canvas.height-1);
+          t[2] = vec2(2*(event.clientX - canvas.offsetLeft)/canvas.width-1, //adjust mengikuti posisi canvas karena canvas digeser ke tengah
+            2*(canvas.height-event.clientY + canvas.offsetTop)/canvas.height-1);
           t[1] = vec2(t[0][0], t[2][1]);
           t[3] = vec2(t[2][0], t[0][1]);
           for(var i=0; i<4; i++) gl.bufferSubData(gl.ARRAY_BUFFER, 8*(index+i), flatten(t[i]));
